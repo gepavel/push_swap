@@ -1,0 +1,23 @@
+name= push_swap
+cc= gcc
+cflags= -Wall -Werror -Wextra
+makelib = ar rcs
+namelib = push_swap.a
+src=	main.c		
+obj = $(src:.c=.o)
+
+all:$(name)
+
+$(name): $(src) $(obj)
+	@$(makelib) $(namelib) $(obj)
+	@$(CC) @(cflags) $(src) $(namelib)
+
+clean:
+	@rm -rf $(obj)
+
+fclean: clean
+	@rm -rf $(name)
+
+re:fclen all
+
+.PHONY:
