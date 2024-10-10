@@ -18,6 +18,7 @@ int		main(int ac, char **av)
 	{
 		while (*av)
 		{
+		printf("hi");
 			
 			
 		}
