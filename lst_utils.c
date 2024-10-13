@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chuliki <chuliki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 12:41:20 by gepavel           #+#    #+#             */
-/*   Updated: 2024/10/10 19:49:34 by chuliki          ###   ########.fr       */
+/*   Created: 2024/10/10 18:23:18 by chuliki           #+#    #+#             */
+/*   Updated: 2024/10/10 19:47:18 by chuliki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-static void fill_stack_a(char *s, t_list **sta)
+t_list	*ft_lst_new(void *cont)
 {
-	char		 **arg;
-	int			i;
-	long int	nb;
+	t_list		*new;
 	
-	i = 0;
-	arg = ft_split(s, ' ');
-	if (!arg && *s)
-		return;
-	
-	while (arg[i])
-		ft_lst_add_back(sta, ft_lst_new((void *)ft_atoi(arg[i++])));
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->value = (long int)cont;
+	new->next = NULL;
+	return (new);
 }
 
-int		main(int ac, char **av)
+void	ft_lst_add_back(t_list **lst, t_list *new)
 {
-	t_list	*sta = NULL;
-//	t_list	*stb;
-	int		i;
-
-	i = 1;
-	while (i < ac)
-		fill_stack_a(av[i++], &sta);
-	print_list(sta);
-
-
-	return (0);
+	t_list	*aux;
+	
+	if (!lst || !new)
+		return ;
+	if (!(*lst))
+		*lst = new;
+		return ;
+	aux = *lst;
+	while (aux && aux->next)
+		aux = aux->next;
+	aux->next = new;
 }
