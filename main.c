@@ -6,7 +6,7 @@
 /*   By: chuliki <chuliki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 12:41:20 by gepavel           #+#    #+#             */
-/*   Updated: 2024/10/15 17:30:20 by chuliki          ###   ########.fr       */
+/*   Updated: 2024/10/15 17:33:01 by chuliki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	fill_stack_a(char *s, t_list **sta)
 	arg = ft_split(s, ' ');
 	if (!arg || !s)
 		return ;
-	while (arg[i] && !error)
+	while (arg[i] || !error)
 	{
 		if (ft_check_int(arg[i]))
 		{
@@ -77,7 +77,7 @@ static void	fill_stack_a(char *s, t_list **sta)
 		i++;
 	}	
 	ft_free(arg, i);
-	if (error)
+	if (error == 1)
 		ft_free_stk(sta, NULL);	
 }
 
