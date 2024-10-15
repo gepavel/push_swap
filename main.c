@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gepavel <gepavel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chuliki <chuliki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 12:41:20 by gepavel           #+#    #+#             */
-/*   Updated: 2024/10/15 14:42:10 by gepavel          ###   ########.fr       */
+/*   Updated: 2024/10/15 17:30:20 by chuliki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static void	fill_stack_a(char *s, t_list **sta)
 
 	i = 0;
 	arg = ft_split(s, ' ');
-	if (!arg && *s)
+	if (!arg || !s)
 		return ;
-	while (arg[i])
+	while (arg[i] && !error)
 	{
 		if (ft_check_int(arg[i]))
 		{
@@ -74,6 +74,7 @@ static void	fill_stack_a(char *s, t_list **sta)
 		}
 		else
 			error = 1;
+		i++;
 	}	
 	ft_free(arg, i);
 	if (error)
@@ -83,13 +84,13 @@ static void	fill_stack_a(char *s, t_list **sta)
 int	main(int ac, char **av)
 {
 	t_list	*sta = NULL;
-	t_list	*stb;
+//	t_list	*stb;
 	int		i;
 	
 	i = 1;
 	while (i < ac)
 		fill_stack_a(av[i++], &sta);
 	print_list(&sta);
-	stb = NULL;
+//	stb = NULL;
 	return (0);
 }

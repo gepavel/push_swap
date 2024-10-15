@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gepavel <gepavel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: chuliki <chuliki@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:47:38 by gepavel           #+#    #+#             */
-/*   Updated: 2024/10/15 14:49:07 by gepavel          ###   ########.fr       */
+/*   Updated: 2024/10/15 17:16:54 by chuliki          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ char	**ft_split(char *str, char c)
 	tab = malloc(sizeof(char *) * words + 1);
 	if (!tab)
 		return ((void *) NULL);
-	tab[words] = malloc(1);
-	tab[words][0] = '\0';
+	tab[words] = 0x0;
 	ft_save_word(tab, str, c);
 	return (tab);
 }
