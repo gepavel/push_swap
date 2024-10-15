@@ -6,7 +6,7 @@
 /*   By: gepavel <gepavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 11:47:38 by gepavel           #+#    #+#             */
-/*   Updated: 2024/10/10 11:52:38 by gepavel          ###   ########.fr       */
+/*   Updated: 2024/10/15 14:49:07 by gepavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ static int	ft_word_len(char *s, char c)
 	return (i);
 }
 
+static void	ft_free(char **s, int len)
+{
+	while (len >= 0)
+		free(s[len]);
+	free(s);
+}
+
 static void	ft_save_word(char **tab, char *s, char c)
 {
 	int	i;
@@ -57,9 +64,7 @@ static void	ft_save_word(char **tab, char *s, char c)
 			tab[i] = malloc(sizeof(char) * ft_word_len(s, c) + 1);
 			if (!(tab[i]))
 			{
-				while (i >= 0)
-					free(tab[i--]);
-				free(tab);
+				ft_free(tab, i - 1);
 				return ;
 			}
 			j = 0;
@@ -73,13 +78,16 @@ static void	ft_save_word(char **tab, char *s, char c)
 char	**ft_split(char *str, char c)
 {
 	char	**tab;
+	int		words;
 
 	if (!str)
 		return ((void *) NULL);
-	tab = malloc(sizeof(char *) * ft_count_words(str, c) + 1);
+	words = ft_count_words(str, c);
+	tab = malloc(sizeof(char *) * words + 1);
 	if (!tab)
 		return ((void *) NULL);
-	tab[ft_count_words(str, c)] = 0x0;
+	tab[words] = malloc(1);
+	tab[words][0] = '\0';
 	ft_save_word(tab, str, c);
 	return (tab);
 }

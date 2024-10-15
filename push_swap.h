@@ -8,7 +8,7 @@
 
 typedef struct s_list
 {
-	long int		value;
+	int				value;
 	int				index;
 	struct s_list 	*next;
 } 					t_list;
@@ -22,14 +22,14 @@ typedef struct s_list
 
 
 
-
-t_list			*ft_lst_new(void *cont);
+void			ft_free_stk(t_list **sta, t_list **stb);
+t_list			*ft_lst_new(int cont);
 void			ft_lst_add_back(t_list **lst, t_list *new);
 long int		ft_atoi(char *s);
 char			**ft_split(char *str, char c);
 
 //############## FUNCS PRUEBA #################//
 
-void			print_list(t_list *lst);
+void			print_list(t_list **lst);
 
 #endif

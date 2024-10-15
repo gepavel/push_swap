@@ -1,6 +1,6 @@
 name= ps
 cc= clang
-cflags= -Wall -Werror -Wextra -g3
+cflags= -Wall -Werror -Wextra -g3 #-fsanitize=address
 makelib = ar rcs
 namelib = push_swap.a
 src=	main.c		split.c		utils.c			lst_utils.c
