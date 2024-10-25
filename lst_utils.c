@@ -6,7 +6,7 @@
 /*   By: gepavel <gepavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 18:23:18 by chuliki           #+#    #+#             */
-/*   Updated: 2024/10/25 13:09:44 by gepavel          ###   ########.fr       */
+/*   Updated: 2024/10/25 13:52:19 by gepavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,17 @@ void	ft_free_exit(t_list **sta, t_list **stb)
 		free_stack(stb);
 	write (1, "Error\n", 6);
 	exit(1);
+}
+
+int		ft_list_size(t_list *lst)
+{
+	int		i;
+
+	i = 0;
+	while(lst)
+	{
+		lst = lst->next;
+		i++;
+	}	
+	return (i);
 }

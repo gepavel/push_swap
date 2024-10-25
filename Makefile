@@ -3,7 +3,8 @@ cc= clang
 cflags= -Wall -Werror -Wextra -ggdb3  -fsanitize=address
 ##makelib = ar rcs
 ##namelib = push_swap.a
-src=	main.c		split.c		utils.c			lst_utils.c
+src=	main.c		split.c		utils.c			lst_utils.c		\
+		push_swap.c		moves_swap.c
 src_p=	utils_pruebas.c
 #obj-P=	$(src_p:.c=.o)
 #obj= $(src:.c=.o)

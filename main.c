@@ -6,20 +6,11 @@
 /*   By: gepavel <gepavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 12:41:20 by gepavel           #+#    #+#             */
-/*   Updated: 2024/10/25 13:10:44 by gepavel          ###   ########.fr       */
+/*   Updated: 2024/10/25 20:20:50 by gepavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
-static void ft_free(char **s, int len)
-{
-	while (--len >= 0)
-		free(s[len]);
-	free(s);
-}
-*/
 
 static int	ft_check_dup(t_list **stk, int nb)
 {
@@ -81,16 +72,21 @@ static void	fill_stack_a(char *s, t_list **sta)
 int	main(int ac, char **av)
 {
 	t_list	*sta = NULL;
-//	t_list	*stb;
+	t_list	*stb = NULL;
+//	stb = NULL;
 	int		i;
-	
+	int		len_s;
+
 	i = 1;
 	while (i < ac)
 		fill_stack_a(av[i++], &sta);
+	len_s = ft_list_size(sta);
+	put_index(sta, len_s);
+	push_swap(&sta, &stb, len_s);
 	print_list(&sta);
-//	stb = NULL;
 	
 	
 	free_stack(&sta);
+	free_stack(&stb);
 	return (0);
 }

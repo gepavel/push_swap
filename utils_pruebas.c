@@ -11,7 +11,7 @@ void	print_list(t_list **lst)
 	int	i = 1;
 	while (aux)
 	{
-		printf("%d-VALUE: %d:		index: %d\n", i++, aux->value, aux->index);
+		printf("%d-VALUE:%d:		index:%d\n", i++, aux->value, aux->index);
 		aux = aux->next;
 	}
 	printf("pintada la lista con exito");
