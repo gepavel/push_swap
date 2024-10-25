@@ -21,12 +21,12 @@ typedef struct s_list
 
 
 
-
-void			ft_free_stk(t_list **sta, t_list **stb);
+void			free_stack(t_list **stk);
+void			ft_free_exit(t_list **sta, t_list **stb);
 t_list			*ft_lst_new(int cont);
 void			ft_lst_add_back(t_list **lst, t_list *new);
 long int		ft_atoi(char *s);
-char			**ft_split(char *str, char c);
+char			**ft_split(const char *str, char c);
 
 //############## FUNCS PRUEBA #################//
 

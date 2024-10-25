@@ -3,100 +3,90 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chuliki <chuliki@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gepavel <gepavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 11:47:38 by gepavel           #+#    #+#             */
-/*   Updated: 2024/10/15 17:16:54 by chuliki          ###   ########.fr       */
+/*   Created: 2023/03/07 19:05:59 by abertran          #+#    #+#             */
+/*   Updated: 2024/10/16 14:25:27 by gepavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_count_words(char *s, char c)
+size_t	ft_strlen(const char *s)
 {
-	int		n;
-
-	n = 0;
-	while (*s)
-	{
-		while (*s && *s == c)
-			s++;
-		if (*s)
-			n++;
-		while (*s && *s != c)
-			s++;
-	}
-	return (n);
-}
-
-static int	ft_word_len(char *s, char c)
-{
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (*s && *s != c)
-	{
+	while (s[i] != '\0')
 		i++;
-		s++;
-	}
 	return (i);
 }
 
-static void	ft_free(char **s, int len)
+static unsigned int	countwords(const char *s, char c)
 {
-	while (len >= 0)
-		free(s[len]);
-	free(s);
+	unsigned int	count;
+
+	count = 0;
+	while (*s)
+	{	
+		while (*s && c == *s)
+			s++;
+		if (*s)
+			count++;
+		while (*s && *s != c)
+			s++;
+	}
+	return (count);
 }
 
-static void	ft_save_word(char **tab, char *s, char c)
+static char	*word_dup(const char *str, int start, int finish)
 {
-	int	i;
-	int	j;
+	char	*word;
+	int		i;
 
 	i = 0;
-	while (*s)
+	word = malloc((finish - start + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	while (start < finish)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
+}
+
+static char	*ft_cpy(size_t i, char const *s, char c, char **split)
+{
+	int		index;
+	size_t	j;
+
+	index = -1;
+	j = 0;
+	while (i <= ft_strlen(s))
 	{
-		if (*s && *s == c)
-			s++;
-		else
+		if (s[i] != c && index < 0)
+			index = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
 		{
-			tab[i] = malloc(sizeof(char) * ft_word_len(s, c) + 1);
-			if (!(tab[i]))
-			{
-				ft_free(tab, i - 1);
-				return ;
-			}
-			j = 0;
-			while (*s && *s != c)
-				tab[i][j++] = *s++;
-			i++;
+			split[j++] = word_dup(s, index, i);
+			index = -1;
 		}
+		i++;
 	}
+	split[j] = 0;
+	return (split[j]);
 }
 
-char	**ft_split(char *str, char c)
+char	**ft_split(char const *s, char c)
 {
-	char	**tab;
-	int		words;
+	size_t	i;
+	char	**split;
 
-	if (!str)
-		return ((void *) NULL);
-	words = ft_count_words(str, c);
-	tab = malloc(sizeof(char *) * words + 1);
-	if (!tab)
-		return ((void *) NULL);
-	tab[words] = 0x0;
-	ft_save_word(tab, str, c);
-	return (tab);
+	if (!s)
+		return (NULL);
+	split = malloc((countwords(s, c) + 1) * sizeof(char *));
+	if (!split)
+		return (NULL);
+	i = 0;
+	ft_cpy(i, s, c, split);
+	return (split);
 }
-/*
-int main (void)
-{
-	char **s = ft_split("Imagina tener un asistente de escritura muy inteligente que te ayude a crear todo tipo de texto, desde correos electrónicos y publicaciones en redes sociales hasta artículos e historias. ¡Eso es exactamente lo que hace un Generador de texto IA! ", ' ');
-	int i = 0;
-	while (s[i] != 0)
-		printf("String:%s\n", s[i++]);
-	return (0);
-}
-*/

@@ -14,5 +14,5 @@ void	print_list(t_list **lst)
 		printf("%d-VALUE: %d:		index: %d\n", i++, aux->value, aux->index);
 		aux = aux->next;
 	}
-	//printf("VALUE: %d:		index: %d\n", aux->value, aux->index);
+	printf("pintada la lista con exito");
 }
